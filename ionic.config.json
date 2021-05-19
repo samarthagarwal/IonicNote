@@ -1,0 +1,7 @@
+{
+  "name": "IonicNote",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

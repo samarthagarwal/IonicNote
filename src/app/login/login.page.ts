@@ -11,7 +11,12 @@ import 'firebase/auth';
 })
 export class LoginPage {
 
-  constructor(private router: Router, private toastCtrl: ToastController) { }
+  user: any = {};
+
+  constructor(private router: Router, private toastCtrl: ToastController) {
+    this.user.email = "s@a.com";
+    this.user.password = "121212";
+   }
 
   async ionViewDidLoad() {
     if(firebase.auth().currentUser != null) {
@@ -25,8 +30,6 @@ export class LoginPage {
       this.router.navigate(["/home"]);
     }
   }
-
-  user: any = {};
 
   goToSignup() {
     this.router.navigate(['/signup']);

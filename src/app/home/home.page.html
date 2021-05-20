@@ -13,5 +13,27 @@
 </ion-header>
 
 <ion-content >
+
+  <ion-card *ngFor="let note of notes">
+    <ion-card-header>
+      <ion-card-title>{{ note.data().title }}</ion-card-title>
+      <ion-card-subtitle *ngIf="note.data().flag">Flagged</ion-card-subtitle>
+    </ion-card-header>
+    <ion-img *ngIf="note.data().image && !(note.data().image == '#')" [src]="note.data().image"></ion-img>
+    <ion-card-content>
+      {{ note.data().description}}
+    </ion-card-content>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" color="primary" fill="clear" (click)="edit(note)">Edit</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" color="danger" fill="clear" (click)="delete(note.id)">Delete</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" color="warning" fill="clear" (click)="flag(note.id)">Flag</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
   
 </ion-content>

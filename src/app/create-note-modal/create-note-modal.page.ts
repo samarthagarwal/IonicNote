@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController, NavParams } from '@ionic/angular';
+import { Plugins, CameraOptions, CameraResultType } from '@capacitor/core';
 
 @Component({
   selector: 'app-create-note-modal',
@@ -10,7 +11,13 @@ export class CreateNoteModalPage implements OnInit {
 
   note: any = {};
 
-  constructor(private toastCtrl: ToastController, private modalCtrl: ModalController) { }
+  constructor(private toastCtrl: ToastController, private modalCtrl: ModalController, private navParams: NavParams) {
+
+    if(this.navParams.data) {
+      this.note = this.navParams.data;
+    }
+
+  }
 
   ngOnInit() {
   }
@@ -28,6 +35,19 @@ export class CreateNoteModalPage implements OnInit {
     console.log(this.note);
 
     this.modalCtrl.dismiss(this.note);
+  }
+
+  async takePhoto() {
+    const { Camera } = Plugins;
+
+    let photo = await Camera.getPhoto({
+      quality: 50,
+      width: 512,
+      height: 512,
+      resultType: CameraResultType.DataUrl
+    });
+
+    this.note.image = photo.dataUrl
   }
 
   close() {

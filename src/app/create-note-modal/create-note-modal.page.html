@@ -28,9 +28,13 @@
       <ion-label position="floating">Description</ion-label>
       <ion-textarea type="text" rows="5" [(ngModel)]="note.description"></ion-textarea>
     </ion-item>
+
     <ion-item>
+      <ion-thumbnail slot="start" *ngIf="note.image">
+        <ion-img [src]="note.image"></ion-img>
+      </ion-thumbnail>
       <ion-label>Add Image</ion-label>
-      <ion-button slot="end" fill="clear" color="danger">
+      <ion-button slot="end" fill="clear" color="danger" (click)="takePhoto()">
         <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
       </ion-button>
     </ion-item>

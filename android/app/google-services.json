@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "256571791550",
+    "project_id": "ionicnote-ac17d",
+    "storage_bucket": "ionicnote-ac17d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256571791550:android:cfff3823c638cfe35026ef",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "256571791550-a20nprmc152sili73lgpga2ulmo767ae.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDrnf8rccEOESJGFRGFm4oARuiTudBW_s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256571791550-a20nprmc152sili73lgpga2ulmo767ae.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

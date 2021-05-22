@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, ToastController, NavParams } from '@ionic/angular';
 import { Plugins, CameraOptions, CameraResultType } from '@capacitor/core';
 
@@ -10,13 +10,14 @@ import { Plugins, CameraOptions, CameraResultType } from '@capacitor/core';
 export class CreateNoteModalPage implements OnInit {
 
   note: any = {};
+  @Input() title: any;
 
   constructor(private toastCtrl: ToastController, private modalCtrl: ModalController, private navParams: NavParams) {
 
-    if(this.navParams.data) {
+    if(this.navParams) {
       this.note = this.navParams.data;
+      console.log(this.note)
     }
-
   }
 
   ngOnInit() {
@@ -32,6 +33,7 @@ export class CreateNoteModalPage implements OnInit {
       return;
     }
 
+    delete this.note["modal"];
     console.log(this.note);
 
     this.modalCtrl.dismiss(this.note);

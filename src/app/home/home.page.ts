@@ -5,6 +5,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 import { CreateNoteModalPage } from '../create-note-modal/create-note-modal.page';
+import { Plugins } from '@capacitor/core';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +27,31 @@ export class HomePage implements OnInit {
     } else {
       this.getNotes();
     }
+
+    this.initializeNotifications();
+  }
+
+  async initializeNotifications() {
+    const { PushNotifications } = Plugins;
+
+    PushNotifications.addListener("registration", async (token) => {
+      await firebase.firestore().collection("Users").doc(firebase.auth().currentUser.uid).set({
+        "token": token.value,
+      })
+      alert(token.value);
+    })
+
+    PushNotifications.addListener("registrationError", async (error) => {
+      alert(error);
+    })
+
+    // Register with FCM
+    let permission = await PushNotifications.requestPermission();
+    if(permission.granted) {
+      await PushNotifications.register();
+    }
+
+
   }
 
   async getNotes() {
@@ -141,6 +167,7 @@ export class HomePage implements OnInit {
   }
 
   async edit(note) {
+    console.log(note.data());
     let modal = await this.modalCtrl.create({
       component: CreateNoteModalPage,
       componentProps: note.data()
@@ -151,7 +178,7 @@ export class HomePage implements OnInit {
 
         console.log(response.data);
 
-        if(response.data.image) {
+        if(response.data.image && response.data.image.indexOf('https') < 0) {
           await this.uploadImage(note.id, response.data)
         }
 
